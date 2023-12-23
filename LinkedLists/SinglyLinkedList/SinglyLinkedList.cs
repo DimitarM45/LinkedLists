@@ -43,9 +43,9 @@ public class SinglyLinkedList<T>
         count++;
     }
 
-    public void Insert(T value, int index)
+    public void InsertAt(T value, int index)
     {
-        if (head == null)
+        if (head == null || index >= count)
         {
             head = new SingleNode<T>(value);
 
@@ -63,35 +63,56 @@ public class SinglyLinkedList<T>
             return;
         }
 
-        SingleNode<T> currentNode = head;
+        SingleNode<T>? currentNode = head;
 
-        SingleNode<T> previousNode = head;
+        SingleNode<T>? previousNode = head;
 
-        for (int i = 0; i <= index - 1; i++)
+        for (int i = 0; i < index; i++)
         {
-            if (currentNode.Next == null)
-            {
-                currentNode.Next = new SingleNode<T>(value);
-
-                count++;
-
-                return;
-            }
-
             previousNode = currentNode;
 
-            currentNode = currentNode.Next;
+            currentNode = currentNode?.Next;
         }
 
         SingleNode<T> newNode = new SingleNode<T>(value);
 
-        SingleNode<T>? tempNextNode = previousNode.Next;
+        SingleNode<T>? tempNextNode = previousNode?.Next;
 
-        previousNode.Next = newNode;
+        previousNode!.Next = newNode;
 
         newNode.Next = tempNextNode;
 
         count++;
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (head == null || index >= count)
+        {
+            return;
+        }
+
+        if (index == 0)
+        {
+            Pop();
+
+            return;
+        }
+
+        SingleNode<T>? currentNode = head;
+
+        SingleNode<T>? previousNode = head;
+
+        for (int i = 0; i < index; i++)
+        {
+            previousNode = currentNode;
+
+            currentNode = currentNode?.Next;
+        }
+
+        previousNode!.Next = currentNode?.Next;
+
+        count--;
     }
 
     public void Clear()
