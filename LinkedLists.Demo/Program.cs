@@ -16,14 +16,6 @@ public class Program
         list.Add(6);
         list.Add(7);
 
-        list.InsertAt(500, 3);
-
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
-        Console.WriteLine(list.Pop());
+        Console.WriteLine(list.CountIf(a => a % 2 == 0));
     }
 }

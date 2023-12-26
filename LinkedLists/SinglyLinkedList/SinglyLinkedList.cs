@@ -1,5 +1,7 @@
 ﻿namespace LinkedLists.SinglyLinkedList;
 
+using System.Collections;
+
 using static ErrorMessages;
 
 public class SinglyLinkedList<T>
@@ -161,5 +163,55 @@ public class SinglyLinkedList<T>
         }
 
         return head.Value;
+    }
+
+    public int CountIf(Predicate<T> predicate)
+    {
+        SingleNode<T>? currentNode = head;
+
+        int countMatches = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (predicate(currentNode!.Value!))
+            {
+                countMatches++;
+            }
+
+            currentNode = currentNode.Next;
+        }
+
+        return countMatches;
+    }
+
+    public bool Contains(Predicate<T> predicate)
+    {
+        SingleNode<T>? currentNode = head;
+
+        bool contains = false;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (predicate(currentNode!.Value!))
+            {
+                contains = true;
+            }
+
+            currentNode = currentNode.Next;
+        }
+
+        return contains;
+    }
+
+    public void ForEach(Action<T?> function)
+    {
+        SingleNode<T>? currentNode = head;
+
+        for (int i = 0; i < count; i++)
+        {
+            function(currentNode!.Value);
+
+            currentNode = currentNode.Next;
+        }
     }
 }
