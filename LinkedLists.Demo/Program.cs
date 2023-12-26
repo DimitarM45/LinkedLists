@@ -15,7 +15,5 @@ public class Program
         list.Add(5);
         list.Add(6);
         list.Add(7);
-
-        Console.WriteLine(list.CountIf(a => a % 2 == 0));
     }
 }

@@ -1,7 +1,5 @@
 ﻿namespace LinkedLists.SinglyLinkedList;
 
-using System.Collections;
-
 using static ErrorMessages;
 
 public class SinglyLinkedList<T>
@@ -201,6 +199,41 @@ public class SinglyLinkedList<T>
         }
 
         return contains;
+    }
+
+    public SinglyLinkedList<T> Filter(Predicate<T> predicate)
+    {
+        SinglyLinkedList<T> list = new SinglyLinkedList<T>();
+
+        SingleNode<T>? currentNode = head;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (predicate(currentNode!.Value!))
+            {
+                list.Add(currentNode!.Value!);
+            }
+
+            currentNode = currentNode.Next;
+        }
+
+        return list;
+    }
+
+    public T[] ValuesToArray()
+    {
+        T[] array = new T[count];
+
+        SingleNode<T>? currentNode = head;
+
+        for (int i = 0; i < count; i++)
+        {
+            array[i] = currentNode!.Value!;
+
+            currentNode = currentNode?.Next;
+        }
+
+        return array;
     }
 
     public void ForEach(Action<T?> function)
